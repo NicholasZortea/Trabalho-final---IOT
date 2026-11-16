@@ -68,13 +68,10 @@ void desenharDicas(const Desafio& desafio) {
   }
 }
 
-void desenharRodape(const char* serial, uint32_t pontos) {
+void desenharRodape(uint32_t pontos) {
   char texto[24];
-  snprintf(texto, sizeof(texto), "SN: %s", serial);
-  escrever(MARGEM, Y_RODAPE, 1, texto);
-
   snprintf(texto, sizeof(texto), "Pontos: %lu", (unsigned long)pontos);
-  escrever(LARGURA / 2 + MARGEM, Y_RODAPE, 1, texto);
+  escrever(MARGEM, Y_RODAPE, 1, texto);
 }
 
 }  // namespace
@@ -95,7 +92,7 @@ void menu(uint32_t recorde) {
   escrever(MARGEM, 34, 3, "QUIMICA");
 
   escrever(MARGEM, 70, 1, "Senha = numeros atomicos em ordem");
-  escrever(MARGEM, 82, 1, "SN impar: 1o digito +2");
+  escrever(MARGEM, 82, 1, "Ex: Ne C B -> 1065");
   escrever(MARGEM, 94, 1, "* limpa   D apaga");
 
   char texto[24];
@@ -110,7 +107,7 @@ void rodada(const Desafio& desafio, const Placar& placar,
   desenharPlacar(placar);
   desenharDicas(desafio);
   escrever(MARGEM, Y_MENSAGEM, 2, mensagem);
-  desenharRodape(desafio.serial, placar.pontos);
+  desenharRodape(placar.pontos);
 }
 
 void tempo(uint16_t segundosRestantes) {

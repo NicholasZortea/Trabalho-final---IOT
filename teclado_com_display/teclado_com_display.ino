@@ -12,7 +12,7 @@
 //  Organização:
 //    Config.h      regras, dificuldade, teclas e pinos
 //    Elementos.*   tabela periódica (número atômico -> símbolo)
-//    Desafio.*     sorteio dos elementos/serial e cálculo da senha
+//    Desafio.*     sorteio dos elementos e cálculo da senha
 //    Tela.*        tudo que é desenhado no display
 //    Recorde.*     recorde salvo na flash
 //    Jogo.*        máquina de estados que liga tudo

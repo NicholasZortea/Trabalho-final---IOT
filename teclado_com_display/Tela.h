@@ -5,7 +5,7 @@
 //    y=30  dicas: símbolos dos elementos sorteados
 //    y=62  mensagem de status
 //    y=86  senha sendo digitada
-//    y=124 serial da bomba e pontuação
+//    y=124 pontuação
 // =============================================================================
 #pragma once
 
