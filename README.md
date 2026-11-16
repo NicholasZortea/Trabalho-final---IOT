@@ -10,10 +10,7 @@ com um **teclado matricial 4x4**, sem Wi-Fi nem MQTT.
 2. O display mostra símbolos de elementos químicos, por exemplo `Ne C B`.
 3. A senha é a junção, em ordem, dos **números atômicos**:
    `Ne C B` → `10` `6` `5` → **`1065`**.
-4. Olhe o **serial (SN)** no rodapé. Se o **último dígito for ímpar**, some
-   **2 ao primeiro dígito** da senha, sem "vai um" (`9 + 2 = 1`).
-   Ex.: `SN: K7QA3` → `1065` vira **`3065`**.
-5. Digite os 4 dígitos. A senha é conferida automaticamente.
+4. Digite os 4 dígitos. A senha é conferida automaticamente.
 
 | Tecla | Função                         |
 |-------|--------------------------------|
@@ -57,7 +54,7 @@ O display é o integrado do T-Display (ST7789, 135x240).
 | `teclado_com_display.ino`   | `setup`/`loop`: liga teclado, tela e jogo      |
 | `Config.h`                  | regras, dificuldade, teclas e pinos            |
 | `Elementos.*`               | tabela periódica (número atômico → símbolo)   |
-| `Desafio.*`                 | sorteio dos elementos/serial e cálculo da senha |
+| `Desafio.*`                 | sorteio dos elementos e cálculo da senha      |
 | `Tela.*`                    | tudo que é desenhado no display               |
 | `Recorde.*`                 | recorde persistido na flash                   |
 | `Jogo.*`                    | máquina de estados do jogo (sem `delay`)      |
