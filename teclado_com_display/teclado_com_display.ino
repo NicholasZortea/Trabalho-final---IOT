@@ -6,6 +6,7 @@
 //  Bibliotecas:
 //    - Keypad, de Mark Stanley
 //    - Adafruit ST7735 and ST7789 Library + Adafruit GFX, da Adafruit
+//    - PubSubClient, de Nick O'Leary
 //
 //  Como jogar: veja o README.md. Regras e ajustes ficam em Config.h.
 //
@@ -16,11 +17,13 @@
 //    Tela.*        tudo que é desenhado no display
 //    Recorde.*     recorde salvo na flash
 //    Jogo.*        máquina de estados que liga tudo
+//    Rede.*        Wi-Fi + MQTT com a Central (protocolo do Grupo 1)
 // =============================================================================
 
 #include <Keypad.h>
 #include "Config.h"
 #include "Jogo.h"
+#include "Rede.h"
 #include "Tela.h"
 
 namespace {
@@ -55,10 +58,12 @@ void setup() {
   tela::iniciar();
   iniciarTeclado();
   jogo.iniciar(millis());
+  rede::iniciar();
 }
 
 void loop() {
   const uint32_t agora = millis();
+  rede::atualizar(agora);
 
   const char tecla = teclado->getKey();
   if (tecla) jogo.tratarTecla(tecla, agora);

@@ -2,7 +2,8 @@
 
 Jogo de desarmar uma "bomba" descobrindo uma senha de 4 dígitos a partir de
 símbolos da tabela periódica. Roda sozinho em um **TTGO T-Display (ESP32)**
-com um **teclado matricial 4x4**, sem Wi-Fi nem MQTT.
+com um **teclado matricial 4x4**. O módulo também se conecta ao broker MQTT
+da Central (Grupo 1) — veja [Rede](#rede-mqtt).
 
 ## Como jogar
 
@@ -45,7 +46,27 @@ O display é o integrado do T-Display (ST7789, 135x240).
 
 - Keypad (Mark Stanley)
 - Adafruit ST7735 and ST7789 Library + Adafruit GFX
-- Core ESP32 (Espressif) — `Preferences` já vem com ele
+- PubSubClient (Nick O'Leary)
+- Core ESP32 (Espressif) — `Preferences` e `WiFi` já vêm com ele
+
+## Rede (MQTT)
+
+Segue o protocolo do Grupo 1 ([RFC 001](https://github.com/GroosL/KTNE-ESP32)).
+Wi-Fi, broker e ID do módulo (`2`) ficam em `Config.h`.
+
+| Tópico                       | Direção  | Uso                                  |
+|------------------------------|----------|--------------------------------------|
+| `jogo/modulo/2/status`       | publica  | `ONLINE` ao conectar, `OFFLINE` (LWT) |
+| `jogo/modulo/2/evento`       | publica  | `SOLVED` / `ERROR`                   |
+| `jogo/modulo/<DEST>/dica/2`  | publica  | dica direta para outro grupo         |
+| `jogo/modulo/2/dica`         | publica  | dica para a Central sortear destino  |
+| `jogo/estado`                | assina   | `START`, `RESET`, `VICTORY`, `DEFEAT` |
+| `jogo/modulo/ativo`          | assina   | grupo da vez                         |
+| `jogo/serial`                | assina   | serial da bomba (`LL-DD`)            |
+| `jogo/tempo`                 | assina   | segundos restantes                   |
+| `jogo/modulo/2/dica/+`       | assina   | dicas recebidas de outros grupos     |
+
+Sem rede o jogo continua funcionando; a reconexão é tentada a cada 5 s.
 
 ## Organização do código
 
@@ -58,3 +79,4 @@ O display é o integrado do T-Display (ST7789, 135x240).
 | `Tela.*`                    | tudo que é desenhado no display               |
 | `Recorde.*`                 | recorde persistido na flash                   |
 | `Jogo.*`                    | máquina de estados do jogo (sem `delay`)      |
+| `Rede.*`                    | Wi-Fi + MQTT com a Central                    |

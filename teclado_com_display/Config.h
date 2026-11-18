@@ -34,6 +34,14 @@ constexpr char TECLA_LIMPAR    = '*';  // apaga tudo que foi digitado
 constexpr char TECLA_APAGAR    = 'D';  // apaga o último dígito
 constexpr char TECLA_CONFIRMAR = '#';  // começa / recomeça a partida
 
+// --- Rede: Wi-Fi do laboratório + broker MQTT da Central (RFC 001) ----------
+constexpr uint8_t  MODULO_ID              = 2;  // número do grupo
+constexpr char     WIFI_SSID[]            = "iot2022";
+constexpr char     WIFI_SENHA[]           = "S3nhab0@";
+constexpr char     MQTT_BROKER[]          = "192.168.2.100";
+constexpr uint16_t MQTT_PORTA             = 1883;
+constexpr uint32_t INTERVALO_RECONEXAO_MS = 5000;
+
 // --- Teclado 4x4 -------------------------------------------------------------
 //  Linhas usam INPUT_PULLUP: evitar GPIO 34-39 (sem pull-up) e pinos de boot
 //  (0, 2, 12, 15).
